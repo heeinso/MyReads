@@ -7,7 +7,6 @@ import {
 	CURRENTLY_READING,
 	WANT_TO_READ,
 	READ_DONE,
-	NONE,
 } from '../constants/shelfType';
 import { fetchAllBooks } from '../actions';
 
