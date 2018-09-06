@@ -34,7 +34,7 @@ const Book = props => {
 				</div>
 				<div className="book-title">{title}</div>
 				<div className="book-authors">
-					{authors ? book.authors.join(', ') : ''}
+					{authors ? book.authors.join(', ') : 'AUTHOR NOT FOUND'}
 				</div>
 			</div>
 		</li>
