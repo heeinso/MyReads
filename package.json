@@ -1,23 +1,23 @@
 {
-  "dependencies": {
-    "lodash": "^4.17.10",
-    "prop-types": "^15.6.1",
-    "react": "^16.3.2",
-    "react-autosuggest": "^9.4.0",
-    "react-dom": "^16.3.2",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.3.1",
-    "redux": "^4.0.0",
-    "redux-saga": "^0.16.0",
-    "styled-components": "^3.4.5"
-  },
-  "devDependencies": {
-    "react-scripts": "1.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+	"dependencies": {
+		"lodash": "^4.17.10",
+		"prop-types": "^15.6.1",
+		"react": "^16.3.2",
+		"react-autosuggest": "^9.4.0",
+		"react-dom": "^16.3.2",
+		"react-redux": "^5.0.7",
+		"react-router-dom": "^4.3.1",
+		"redux": "^4.0.0",
+		"redux-saga": "^0.16.0",
+		"styled-components": "^3.4.5"
+	},
+	"devDependencies": {
+		"react-scripts": "1.1.4"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject"
+	}
 }
