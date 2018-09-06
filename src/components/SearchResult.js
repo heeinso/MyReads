@@ -6,6 +6,12 @@ import { NONE } from '../constants/shelfType';
 import { fetchAllBooks } from '../actions/index';
 
 class SearchResult extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			showResult: false,
+		};
+	}
 	componentDidMount() {
 		this.props.fetchAllBooks();
 	}
@@ -15,18 +21,24 @@ class SearchResult extends Component {
 		return (
 			<div className="search-books-results">
 				<ol className="books-grid">
-					{searchedBooks.map(searchedBook => {
-						let result = books.find(
-							book => book.id === searchedBook.id
-						);
-						return (
-							<Book
-								key={searchedBook.id}
-								book={searchedBook}
-								shelf={result ? result.shelf : NONE}
-							/>
-						);
-					})}
+					{!!searchedBooks ? (
+						searchedBooks.map(searchedBook => {
+							let result = books.find(
+								book => book.id === searchedBook.id
+							);
+							return (
+								<Book
+									key={searchedBook.id}
+									book={searchedBook}
+									shelf={result ? result.shelf : NONE}
+								/>
+							);
+						})
+					) : (
+						<div className="books-not-found">
+							Sorry. No Book Found ... ((´д｀))
+						</div>
+					)}
 				</ol>
 			</div>
 		);

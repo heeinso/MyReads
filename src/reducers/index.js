@@ -24,7 +24,7 @@ const bookReducer = (state = [], action) => {
 const searchReducer = (state = [], action) => {
 	switch (action.type) {
 		case SEARCH_BOOKS_SUCCESS:
-			return [...action.books];
+			return action.books.length > 0 ? [...action.books] : null;
 		case CLEAR_SEARCH_RESULT:
 			return [];
 		default:

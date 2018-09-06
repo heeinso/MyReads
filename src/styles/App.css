@@ -157,6 +157,11 @@ body,
 
 /* books grid */
 
+.books-not-found {
+	margin-top: 100px;
+	font-size: 36px;
+}
+
 .books-grid {
 	list-style-type: none;
 	padding: 0;
