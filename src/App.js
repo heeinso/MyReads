@@ -4,7 +4,7 @@ import './styles/App.css';
 
 import BookList from './pages/BookList';
 import Search from './pages/Search';
-import NotFound from './components/NotFound';
+import PageNotFound from './components/PageNotFound';
 
 class App extends Component {
 	render() {
@@ -13,7 +13,7 @@ class App extends Component {
 				<Switch>
 					<Route exact path="/" component={BookList} />
 					<Route exact path="/search" component={Search} />
-					<Route component={NotFound} />
+					<Route component={PageNotFound} />
 				</Switch>
 			</Router>
 		);

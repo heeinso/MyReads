@@ -5,7 +5,7 @@ import * as api from '../utils/BooksAPI';
 import {
 	FETCH_ALL_BOOKS,
 	FETCH_ALL_BOOKS_SUCCESS,
-	CHANGE_BOOK_SHELF,
+	CHANGE_SHELF,
 	SEARCH_BOOKS,
 	SEARCH_BOOKS_SUCCESS,
 } from '../constants/actionType';
@@ -22,15 +22,15 @@ export function* fetchAllBooks() {
 	yield takeEvery(FETCH_ALL_BOOKS, fetchAllBooksHandler);
 }
 
-export function* changeBookShelfHandler(action) {
+export function* changeShelfHandler(action) {
 	yield call(api.update, action.payload.book, action.payload.shelf);
 	yield put({
 		type: FETCH_ALL_BOOKS,
 	});
 }
 
-export function* changeBookShelf() {
-	yield takeEvery(CHANGE_BOOK_SHELF, changeBookShelfHandler);
+export function* changeShelf() {
+	yield takeEvery(CHANGE_SHELF, changeShelfHandler);
 }
 
 export function* searchBooksHandler(action) {
@@ -46,5 +46,5 @@ export function* searchBooks() {
 }
 
 export default function* rootSaga() {
-	yield all([fetchAllBooks(), changeBookShelf(), searchBooks()]);
+	yield all([fetchAllBooks(), changeShelf(), searchBooks()]);
 }

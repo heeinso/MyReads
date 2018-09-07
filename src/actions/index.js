@@ -1,6 +1,6 @@
 import {
 	FETCH_ALL_BOOKS,
-	CHANGE_BOOK_SHELF,
+	CHANGE_SHELF,
 	SEARCH_BOOKS,
 	CLEAR_SEARCH_RESULT,
 } from '../constants/actionType';
@@ -11,9 +11,9 @@ export const fetchAllBooks = () => {
 	};
 };
 
-export const changeBookShelf = (book, shelf) => {
+export const changeShelf = (book, shelf) => {
 	return {
-		type: CHANGE_BOOK_SHELF,
+		type: CHANGE_SHELF,
 		payload: {
 			book,
 			shelf,

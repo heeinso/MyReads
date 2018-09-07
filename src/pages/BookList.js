@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import BookShelf from '../components/BookShelf';
+import ShelfContainer from '../components/ShelfContainer';
 import {
 	CURRENTLY_READING,
 	WANT_TO_READ,
@@ -23,20 +23,20 @@ class BookList extends Component {
 					<h1>My Reads</h1>
 				</div>
 				<div className="book-list-content">
-					<BookShelf
+					<ShelfContainer
 						shelf={CURRENTLY_READING}
 						books={books}
-						heading="Currently Reading"
+						title="Currently reading"
 					/>
-					<BookShelf
+					<ShelfContainer
 						shelf={WANT_TO_READ}
 						books={books}
-						heading="Want To Read"
+						title="Want to read"
 					/>
-					<BookShelf
+					<ShelfContainer
 						shelf={READ_DONE}
 						books={books}
-						heading="Read Done"
+						title="Read done"
 					/>
 				</div>
 				<div className="open-search">

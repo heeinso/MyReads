@@ -3,19 +3,23 @@ import {
 	FETCH_ALL_BOOKS_SUCCESS,
 	SEARCH_BOOKS_SUCCESS,
 	CLEAR_SEARCH_RESULT,
-	CHANGE_BOOK_SHELF,
+	CHANGE_SHELF,
 } from '../constants/actionType';
 
 const bookReducer = (state = [], action) => {
 	switch (action.type) {
+		case CHANGE_SHELF:
+			const targetIndex = state.indexOf(action.payload.book);
+			const existingBooks = [
+				...state.slice(0, targetIndex),
+				...state.slice(targetIndex + 1),
+			];
+			const targetBook = state[targetIndex];
+			targetBook.shelf = action.payload.shelf;
+			existingBooks.push(targetBook);
+			return [...existingBooks];
 		case FETCH_ALL_BOOKS_SUCCESS:
 			return [...action.books];
-		case CHANGE_BOOK_SHELF:
-			const index = state.indexOf(action.payload.book);
-			const items = state.splice(index, 1);
-			items[0].shelf = action.payload.shelf;
-			state.push(items[0]);
-			return [...state];
 		default:
 			return state;
 	}

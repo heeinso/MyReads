@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { searchBooks, clearSearchResult } from '../actions';
-import SearchBar from '../components/SearchBar';
+import SearchInput from '../components/SearchInput';
 import SearchResult from '../components/SearchResult';
 
 class Search extends Component {
@@ -10,7 +10,7 @@ class Search extends Component {
 		this.props.clearSearchResult();
 	}
 
-	throttledSearch = query => {
+	handleSearch = query => {
 		if (query.trim() === '') {
 			this.props.clearSearchResult();
 		} else {
@@ -21,7 +21,7 @@ class Search extends Component {
 	render() {
 		return (
 			<div className="search-books">
-				<SearchBar throttledSearch={this.throttledSearch} />
+				<SearchInput handleSearch={this.handleSearch} />
 				<SearchResult />
 			</div>
 		);

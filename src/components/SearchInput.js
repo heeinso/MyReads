@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import Autosuggest from 'react-autosuggest';
 import { Link } from 'react-router-dom';
 import debounce from 'lodash/debounce';
-import Autosuggest from 'react-autosuggest';
 
-import keywords from '../utils/searchTerm';
+import { keywords } from '../utils/keywords';
 
+/* Refer to https://github.com/moroshko/react-autosuggest/blob/master/README.md */
+
+// Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = value => {
 	const inputValue = value.trim().toLowerCase();
 	const inputLength = inputValue.length;
@@ -18,20 +21,34 @@ const getSuggestions = value => {
 		  );
 };
 
+// When suggestion is clicked, Autosuggest needs to populate the input
+// based on the clicked suggestion. Teach Autosuggest how to calculate the
+// input value for every given suggestion.
 const getSuggestionValue = suggestion => suggestion.name;
 
+// Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
 	<div key={suggestion.name}>{suggestion.name}</div>
 );
 
-class SearchBar extends Component {
+class SearchInput extends Component {
 	constructor(props) {
 		super(props);
+
+		// Autosuggest is a controlled component.
+		// This means that you need to provide an input value
+		// and an onChange handler that updates this value (see below).
+		// Suggestions also need to be provided to the Autosuggest,
+		// and they are initially empty because the Autosuggest is closed.
 		this.state = {
 			value: '',
 			suggestions: [],
 		};
-		this.changed = debounce(this.props.throttledSearch, 300);
+
+		// Apply lodash debounce for better User Experience
+		this.changed = debounce(this.props.handleSearch, 200, {
+			maxWait: 300,
+		});
 	}
 
 	onChange = (event, { newValue }) => {
@@ -40,29 +57,28 @@ class SearchBar extends Component {
 		});
 	};
 
+	// Autosuggest will call this function every time you need to update suggestions.
+	// You already implemented this logic above, so just use it.
 	onSuggestionsFetchRequested = ({ value }) => {
 		this.setState({
 			suggestions: getSuggestions(value),
 		});
 	};
 
+	// Autosuggest will call this function every time you need to clear suggestions.
 	onSuggestionsClearRequested = () => {
 		this.setState({
 			suggestions: [],
 		});
 	};
 
-	onSearchHandler = e => {
-		const value = e.target.value;
-		this.setState({ value }, () => {
-			this.changed(value);
-		});
-	};
-
 	render() {
+		const { value, suggestions } = this.state;
+
+		// Autosuggest will pass through all these props to the input.
 		const inputProps = {
 			placeholder: 'Find books by title or author!',
-			value: this.state.value,
+			value,
 			onChange: this.onChange,
 		};
 
@@ -73,8 +89,7 @@ class SearchBar extends Component {
 				</Link>
 				<div className="search-books-input-wrapper">
 					<Autosuggest
-						style={{ listStyleType: 'none' }}
-						suggestions={this.state.suggestions}
+						suggestions={suggestions}
 						onSuggestionsFetchRequested={
 							this.onSuggestionsFetchRequested
 						}
@@ -102,4 +117,4 @@ class SearchBar extends Component {
 	}
 }
 
-export default SearchBar;
+export default SearchInput;

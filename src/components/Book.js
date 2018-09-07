@@ -1,36 +1,26 @@
 import React from 'react';
 
-import BookShelfChanger from './BookShelfChanger';
+import CoverImage from './CoverImage';
+import Option from './Option';
 
 const Book = props => {
-	const {
-		book,
-		book: { title, authors, imageLinks },
-		shelf,
-	} = props;
+	const { book, shelf } = props;
 
-	let thumbnail = () => {
-		if (imageLinks) {
-			return imageLinks.thumbnail;
-		}
-		return `http://via.placeholder.com/128x192?text=${encodeURIComponent(
-			title.trim()
-		)}`;
-	};
+	const { title, authors, imageLinks } = book;
+
+	const thumbnail = () =>
+		imageLinks
+			? imageLinks.thumbnail
+			: `https://dummyimage.com/128x192/d3d3d3/fff.png&text=${encodeURIComponent(
+					title.trim()
+			  )}`;
 
 	return (
 		<li>
 			<div className="book">
 				<div className="book-top">
-					<div
-						className="book-cover"
-						style={{
-							width: 128,
-							height: 192,
-							backgroundImage: `url(${thumbnail()})`,
-						}}
-					/>
-					<BookShelfChanger book={book} shelf={shelf || book.shelf} />
+					<CoverImage thumbnail={thumbnail()} />
+					<Option book={book} shelf={shelf} />
 				</div>
 				<div className="book-title">{title}</div>
 				<div className="book-authors">
